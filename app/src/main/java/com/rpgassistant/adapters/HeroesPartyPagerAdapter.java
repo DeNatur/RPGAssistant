@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.rpgassistant.fragments.CompendiumFragment;
+import com.rpgassistant.fragments.FriendsFragment;
 import com.rpgassistant.fragments.HeroesFragment;
 import com.rpgassistant.fragments.PartyFragment;
 import com.rpgassistant.fragments.ProfileFragment;
@@ -29,6 +30,9 @@ public class HeroesPartyPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 fragment = new PartyFragment();
                 break;
+            case 2:
+                fragment = new FriendsFragment();
+                break;
             default:
                 fragment = new HeroesFragment();
         }
@@ -37,6 +41,6 @@ public class HeroesPartyPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }

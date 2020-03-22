@@ -63,9 +63,9 @@
             app:nts_color="#fff"
             app:nts_gravity="bottom"
             app:nts_size="15sp"
-            app:nts_type="point"
+            app:nts_type="line"
             app:nts_weight="3dp"
-            android:background="@drawable/round_outline_bot"
+            android:background="@color/back_grey"
             app:nts_animation_duration="300"
             app:nts_active_color="#fff"
             app:nts_titles="@array/heroes_party"
@@ -74,6 +74,7 @@
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
     </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

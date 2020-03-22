@@ -3,6 +3,7 @@
     <array name="heroes_party">
         <item>HEROES</item>
         <item>PARTY</item>
+        <item>FRIENDS</item>
     </array>
 
 </resources>

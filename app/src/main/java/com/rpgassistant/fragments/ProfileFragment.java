@@ -1,7 +1,5 @@
 package com.rpgassistant.fragments;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +14,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.gigamole.navigationtabstrip.NavigationTabStrip;
 import com.rpgassistant.R;
 import com.rpgassistant.adapters.HeroesPartyPagerAdapter;
-import com.rpgassistant.utils.TextDrawable;
-
-import java.util.ArrayList;
-
-import devlight.io.library.ntb.NavigationTabBar;
 
 public class ProfileFragment extends Fragment {
     NavigationTabStrip navigationTabBar;
