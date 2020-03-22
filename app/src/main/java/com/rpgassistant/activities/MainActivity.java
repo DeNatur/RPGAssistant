@@ -16,10 +16,11 @@ import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.rpgassistant.R;
 import com.rpgassistant.adapters.MainActivityPagerAdapter;
+import com.rpgassistant.utils.NonSwipeableViewPager;
 
 public class MainActivity extends AppCompatActivity {
 
-    ViewPager pager;
+    NonSwipeableViewPager pager;
     TextView titleTV;
     MainActivityPagerAdapter mainActivityPagerAdapter;
     @Override
@@ -39,13 +40,6 @@ public class MainActivity extends AppCompatActivity {
         pager = findViewById(R.id.viewPager);
         mainActivityPagerAdapter = new MainActivityPagerAdapter(getSupportFragmentManager(), 0);
         pager.setAdapter(mainActivityPagerAdapter);
-        pager.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                pager.setCurrentItem(pager.getCurrentItem());
-                return true;
-            }
-        });
 
         spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override

@@ -25,9 +25,23 @@ public class HeroesAdapter extends ListAdapter<Hero, HeroesAdapter.ViewHolder> {
 
         @Override
         public boolean areContentsTheSame(@NonNull Hero oldItem, @NonNull Hero newItem) {
-            return
+            String oldHeroClass = "", newHeroClass = "", oldHeroLvl = "", newHeroLvl = "";
+            for (int value : oldItem.getHeroClasses()){
+                oldHeroClass = oldHeroClass + String.valueOf(value);
+            }
+            for (int value : newItem.getHeroClasses()){
+                newHeroClass = newHeroClass + String.valueOf(value);
+            }
+            for (int value : oldItem.getLvls()){
+                oldHeroLvl = oldHeroLvl + String.valueOf(value);
+            }
+            for (int value : newItem.getLvls()){
+                newHeroLvl = newHeroLvl + String.valueOf(value);
+            }
+            return  oldHeroClass.equals(newHeroClass) &&
+                    oldHeroLvl.equals(newHeroLvl) &&
                     oldItem.getName().equals(newItem.getName()) &&
-                    oldItem.getStatsJson().equals(newItem) &&
+                    oldItem.getStatsJson().equals(newItem.getStatsJson()) &&
                     oldItem.getType() == newItem.getType();
         }
     };
@@ -43,8 +57,12 @@ public class HeroesAdapter extends ListAdapter<Hero, HeroesAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Hero hero = getHeroAt(position);
         holder.heroNameTV.setText(hero.getName());
-        holder.heroClassTV.setText(hero.getProperHeroClass(0) + " lvl" + hero.getLvls()[0]);
+        holder.heroClassTV.setText(hero.getProperHeroClass(0) + " lvl " + hero.getLvls()[0]);
         holder.avatarIV.setImageResource(hero.getIconResource());
+        switch (hero.getType()){
+            default:
+                holder.heroTypeTV.setText("D&D 5e");
+        }
 
     }
 
@@ -53,13 +71,14 @@ public class HeroesAdapter extends ListAdapter<Hero, HeroesAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView heroNameTV, heroClassTV;
+        TextView heroNameTV, heroClassTV, heroTypeTV;
         ImageView avatarIV;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             heroNameTV = itemView.findViewById(R.id.heroNameTV);
             heroClassTV = itemView.findViewById(R.id.heroClassTV);
+            heroTypeTV = itemView.findViewById(R.id.heroTypeTV);
             avatarIV = itemView.findViewById(R.id.heroAvatarIV);
         }
     }

@@ -8,7 +8,7 @@ import org.json.JSONException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class Converters {
+public class ConverterIntArrayToString {
     @TypeConverter
     public static String JSONArrayfromIntArray(int[] values) {
         JSONArray jsonArray = new JSONArray();

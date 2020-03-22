@@ -5,10 +5,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.rpgassistant.R;
-import com.rpgassistant.utils.Converters;
-
-import java.util.ConcurrentModificationException;
-import java.util.List;
+import com.rpgassistant.utils.ConverterIntArrayToString;
 
 /*
     Type: 0 Dungeons And Dragons
@@ -33,11 +30,11 @@ public class Hero {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
-    @TypeConverters(Converters.class)
+    @TypeConverters(ConverterIntArrayToString.class)
     private int[] heroClasses;
     private Integer type;
     private String statsJson;
-    @TypeConverters(Converters.class)
+    @TypeConverters(ConverterIntArrayToString.class)
     private int[] lvls;
     private int iconResource;
 

@@ -25,7 +25,7 @@
                 android:scaleType="centerCrop"
                 android:layout_gravity="center"
                 android:background="@drawable/round_outline"
-                android:src="@drawable/avatar"/>
+                android:src="@drawable/avatar_placeholder"/>
         </FrameLayout>
         <TextView
             android:layout_width="match_parent"
