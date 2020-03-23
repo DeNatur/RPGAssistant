@@ -6,35 +6,32 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.rpgassistant.models.Hero;
-import com.rpgassistant.repositories.HeroRepository;
+import com.rpgassistant.repositories.FirestoreRepository;
 
 import java.util.List;
 
 public class HeroViewModel extends AndroidViewModel {
-    private HeroRepository repository;
-    private LiveData<List<Hero>> allNotes;
+    private FirestoreRepository repository;
+    private LiveData<List<Hero>> allHeroes;
 
     public HeroViewModel(@NonNull Application application) {
         super(application);
-        repository = new HeroRepository(application);
-        allNotes = repository.getAllHeroes();
+        repository = new FirestoreRepository();
+        allHeroes = repository.getAllHeroes();
     }
 
     public void insert(Hero hero) {
-        repository.insert(hero);
+        repository.addHero(hero);
     }
 
     public void update(Hero hero){
-        repository.update(hero);
+        repository.updateHero(hero);
     }
 
     public void delete(Hero hero){
-        repository.delete(hero);
-    }
-
-    public void deleteAllNotes(){
-        repository.deleteAllNotes();
+        repository.deleteHero(hero);
     }
 
     public LiveData<List<Hero>> getAllHeroes(){

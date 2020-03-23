@@ -26,16 +26,16 @@ public class HeroesAdapter extends ListAdapter<Hero, HeroesAdapter.ViewHolder> {
         @Override
         public boolean areContentsTheSame(@NonNull Hero oldItem, @NonNull Hero newItem) {
             String oldHeroClass = "", newHeroClass = "", oldHeroLvl = "", newHeroLvl = "";
-            for (int value : oldItem.getHeroClasses()){
-                oldHeroClass = oldHeroClass + String.valueOf(value);
+            for (String value : oldItem.getHeroClasses().keySet()){
+                oldHeroClass = oldHeroClass + value;
             }
-            for (int value : newItem.getHeroClasses()){
-                newHeroClass = newHeroClass + String.valueOf(value);
+            for (String value : newItem.getHeroClasses().keySet()){
+                newHeroClass = newHeroClass + value;
             }
-            for (int value : oldItem.getLvls()){
+            for (int value : oldItem.getHeroClasses().values()){
                 oldHeroLvl = oldHeroLvl + String.valueOf(value);
             }
-            for (int value : newItem.getLvls()){
+            for (int value : newItem.getHeroClasses().values()){
                 newHeroLvl = newHeroLvl + String.valueOf(value);
             }
             return  oldHeroClass.equals(newHeroClass) &&
@@ -57,7 +57,7 @@ public class HeroesAdapter extends ListAdapter<Hero, HeroesAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Hero hero = getHeroAt(position);
         holder.heroNameTV.setText(hero.getName());
-        holder.heroClassTV.setText(hero.getProperHeroClass(0) + " lvl " + hero.getLvls()[0]);
+        holder.heroClassTV.setText(hero.getProperHeroClass(0) + " lvl " + hero.getHeroClasses().values().toArray()[0]);
         holder.avatarIV.setImageResource(hero.getIconResource());
         switch (hero.getType()){
             default:

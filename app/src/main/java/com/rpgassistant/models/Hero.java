@@ -1,11 +1,9 @@
 package com.rpgassistant.models;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
-
+import com.google.firebase.firestore.Exclude;
 import com.rpgassistant.R;
-import com.rpgassistant.utils.ConverterIntArrayToString;
+import java.io.Serializable;
+import java.util.HashMap;
 
 /*
     Type: 0 Dungeons And Dragons
@@ -25,39 +23,69 @@ import com.rpgassistant.utils.ConverterIntArrayToString;
             12: Bloodhunter
             13+: Custom
 */
-@Entity(tableName = "hero_table")
-public class Hero {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+public class Hero implements Serializable {
+    private String uid;
     private String name;
-    @TypeConverters(ConverterIntArrayToString.class)
-    private int[] heroClasses;
+    @Exclude
+    private String id;
+    private HashMap<String, Integer> heroClasses;
     private Integer type;
     private String statsJson;
-    @TypeConverters(ConverterIntArrayToString.class)
-    private int[] lvls;
+    @Exclude
     private int iconResource;
-
-    public Hero(String name, int[] heroClasses, Integer type, String statsJson, int[] lvls) {
+     public Hero(){ }
+    public Hero(String uid, String name, HashMap<String, Integer> heroClasses, Integer type, String statsJson) {
+        this.uid = uid;
         this.name = name;
         this.heroClasses = heroClasses;
-        this.lvls = lvls;
         this.type = type;
         this.statsJson = statsJson;
         switch (type){
             default:
-                setDndResourceIcon();
+                setIconResource(getDndResourceIcon(0));
                 break;
         }
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public HashMap<String, Integer> getHeroClasses() {
+        return heroClasses;
+    }
+
+    public void setHeroClasses(HashMap<String, Integer> heroClasses) {
+        this.heroClasses = heroClasses;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public void setStatsJson(String statsJson) {
+        this.statsJson = statsJson;
     }
 
     public void setIconResource(int iconResource) {
         this.iconResource = iconResource;
     }
-
-    public void setId(int id) { this.id = id; }
-
-    public int getId() { return id; }
 
     public Integer getType() { return type; }
 
@@ -67,14 +95,12 @@ public class Hero {
         return name;
     }
 
-    public int[] getHeroClasses() { return heroClasses; }
-
-    public int[] getLvls() {
-        return lvls;
-    }
 
     public int getIconResource() {
-        return iconResource;
+        switch (type){
+            default:
+                return getDndResourceIcon(0);
+        }
     }
     public String getProperHeroClass(int position){
         switch (type){
@@ -83,7 +109,7 @@ public class Hero {
         }
     }
     private String getDnDClass(int position){
-        switch (heroClasses[position]){
+        switch (Integer.parseInt(String.valueOf(heroClasses.keySet().toArray()[position]))){
             case 0:
                 return "Barbarian";
             case 1:
@@ -115,8 +141,9 @@ public class Hero {
         }
         return "";
     }
-    private void setDndResourceIcon(){
-        switch (heroClasses[0]){
+    private int getDndResourceIcon(int position){
+        int iconResource = 0;
+        switch (Integer.parseInt(String.valueOf(heroClasses.keySet().toArray()[position]))){
             case 0:
                 iconResource = R.drawable.barbarian;
                 break;
@@ -160,6 +187,7 @@ public class Hero {
                 iconResource = R.drawable.barbarian;
                 break;
         }
+        return iconResource;
     }
 }
 
